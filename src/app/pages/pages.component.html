@@ -1,0 +1,159 @@
+<div class="main-container">
+  <mat-drawer-container autosize>
+    <mat-drawer #sidenav mode="over" class="sidenav-container">
+      <img src="assets/logo.png"
+        class="logo-small"
+        alt="logo-small">
+      <mat-divider></mat-divider>
+      <button
+        class="menu-button-accent"
+        mat-button
+        [routerLink]="['/']" routerLinkActive="router-link-active">
+        Home
+      </button>
+      <mat-divider></mat-divider>
+      <mat-accordion>
+          <mat-expansion-panel class="side-panel">
+            <mat-expansion-panel-header>
+              Libri
+            </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+            <ng-container *ngFor="let item of taxonomies$ | async" [style.padding]=0>
+              <mat-expansion-panel class="side-panel">
+                <mat-expansion-panel-header>
+                  {{item.name | titlecase }}
+                </mat-expansion-panel-header>
+                <mat-divider></mat-divider>
+                <ng-container *ngFor="let subItem of item.values">
+                  <a 
+                    class="sidenav-link"
+                    [routerLink]="['/' + item.name, subItem]" routerLinkActive="router-link-active">
+                    {{ subItem | titlecase }}
+                  </a>
+                  <mat-divider></mat-divider>
+                </ng-container>
+              </mat-expansion-panel>
+              <mat-divider></mat-divider>
+            </ng-container>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-divider></mat-divider>
+      <button
+        [routerLink]="['/accedi']" routerLinkActive="router-link-active"
+        class="menu-button"
+        mat-button>
+        Accedi
+      </button>
+      <button
+        [routerLink]="['/registro']" routerLinkActive="router-link-active"
+        class="menu-button-accent"
+        mat-button>
+        Registro
+      </button>
+      <mat-divider></mat-divider>
+    </mat-drawer>
+    <div class="navbar">
+      <div class="container"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="5px">
+        <button
+          class="menu-button"
+          mat-button
+          fxFlex=10%
+          [ngStyle]="{'display' : isLargeScreen ? 'none' : 'block'}"
+          (click)="sidenav.toggle()">
+          <mat-icon>reorder</mat-icon>
+        </button>
+        <div class="logo-container"
+          [ngStyle]="{'display' : isLargeScreen ? 'block' : 'none'}"
+          fxFlex=20%>
+          <a [routerLink]="['/']"><img src="assets/logo.png" alt="logo"></a>
+        </div>
+        <button
+          class="menu-button"
+          mat-button
+          [ngStyle]="{'display' : isLargeScreen ? 'inline-block' : 'none'}"
+          [routerLink]="['/']" routerLinkActive="router-link-active"
+          fxFlex=10%>
+          Home
+        </button>
+        <button
+          class="menu-button"
+          [ngStyle]="{'display' : isLargeScreen ? 'inline-block' : 'none'}"
+          mat-button [matMenuTriggerFor]="taxonomyMainMenu"
+          fxFlex=10%>
+          Libri
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #taxonomyMainMenu="matMenu">
+          <ng-container *ngFor="let item of taxonomies$ | async">
+            <button mat-menu-item [matMenuTriggerFor]="taxonomySubMenu">{{item.name | titlecase }}</button>
+            <mat-menu #taxonomySubMenu="matMenu">
+                <button                  
+                  class="nav-button"
+                  *ngFor="let subItem of item.values"
+                  [routerLink]="['/' + item.name, subItem]"
+                  mat-menu-item>
+                    {{ subItem | titlecase }}
+                </button>
+            </mat-menu>
+          </ng-container>
+        </mat-menu>
+        <mat-form-field
+          [style.margin-right.rem]="1"
+          fxFlex=40%
+          fxFlex.xs=90%>
+          <input matInput type="text" placeholder="Cerca" (input)="onSearchTextChanged($event.target.value)" [matAutocomplete]="searchautocomplete">
+          <button mat-button matSuffix mat-icon-button aria-label="search">
+            <mat-icon>search</mat-icon>
+          </button>
+          <mat-autocomplete #searchautocomplete="matAutocomplete">
+            <mat-option *ngFor="let record of searchAutoComplete$ | async" 
+              [value]="record.title"
+              [routerLink]="['/libri', record.categorie_slug, record.slug]" routerLinkActive="router-link-active">
+              <img src="{{record.image}}" alt="{{record.title}}" class="autocomplete-image" >
+              <span>{{record.title}}</span>
+              <small *ngIf="record.autore_name"> di {{record.autore_name}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button
+          class="menu-button"
+          [routerLink]="['/accedi']" routerLinkActive="router-link-active"
+          mat-button
+          [ngStyle]="{'display' : isLargeScreen ? 'inline-block' : 'none'}"
+          fxFlex=10%>
+          Accedi
+        </button>
+        <button
+          class="menu-button"
+          mat-button
+          [routerLink]="['/registro']" routerLinkActive="router-link-active"
+          [ngStyle]="{'display' : isLargeScreen ? 'inline-block' : 'none'}"
+          fxFlex=10%>
+          Registro
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+    <footer>
+      <div
+        class="footer"
+        fxLayout.sm="row"
+        fxLayoutAlign.sm="end center"
+        fxLayoutGap.sm=5rem
+        fxLayout="column"
+        fxLayoutAlign="center end"
+        fxLayoutGap=1rem>
+        <a [routerLink]="['/politica-sulla-resirvatezza']" routerLinkActive="router-link-active">Politica Sulla Riservatezza</a>
+        <a [routerLink]="['/dmca']" routerLinkActive="router-link-active">DMCA</a>
+        <a [routerLink]="['/contact']" routerLinkActive="router-link-active">Contattaci</a>
+      </div>
+    </footer>
+  </mat-drawer-container>
+</div>

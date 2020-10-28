@@ -1,0 +1,94 @@
+mat-divider {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+mat-expansion-panel-header {
+  padding: 0 5px;
+}
+
+mat-accordion {
+  text-align: left !important;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+.sidenav-container {
+  min-width: 150px;
+  max-width: 300px;
+  text-align: center;
+  padding: 10px;
+}
+
+.logo-small {
+  max-height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sidenav-link {
+  display: block;
+  padding: 0 5px;
+}
+
+.side-panel {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.navbar {
+  padding: 2px;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+  img {
+    max-height: 80px;
+    display: block;
+    margin: auto;
+  }
+  .logo-container {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.menu-button {
+  font-size: 16px;
+}
+
+.menu-button-accent {
+  font-size: 16px;
+}
+
+.search-box {
+  width: 40%;
+}
+
+.autocomplete-image {
+  height: 45px;
+  width: 40px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.footer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  background-color: #616161;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+
+  a {
+    color: whitesmoke !important;
+
+    &:hover {
+      color:#c62828 !important;
+    }
+  }
+}

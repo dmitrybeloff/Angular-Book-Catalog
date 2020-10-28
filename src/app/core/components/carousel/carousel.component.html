@@ -1,0 +1,33 @@
+<ngu-carousel
+  *ngIf="dataSource; else spinner"
+  [style.height.rem]="22"
+  [inputs]="carouselTile"
+  [dataSource]="dataSource"
+  (mouseenter)="mouseover=true"
+  (mouseleave)="mouseover=false">
+  <ngu-tile *nguCarouselDef="let item; let i = index" [style.padding.px]="5">
+    <div class="carousel-item">
+      <div class="carousel-image-container" [routerLink]="['/libri', item.categorie_slug, item.slug]">
+          <img src="{{item.image}}" alt="{{item.title}}">
+      </div>
+      <a [routerLink]="['/libri', item.categorie_slug, item.slug]" class="carousel-link">
+        <h2>{{ (item.title.length > 16) ? (item.title | slice:0:16) + '...' : item.title }}</h2>
+      </a>
+      <a *ngIf="item.autore_name" [routerLink]="['/autore', item.autore_slug]" class="carousel-link">
+        <small>{{ (item.autore_name.length > 18) ? (item.autore_name | slice:0:18) + '...' : item.autore_name }}</small>
+      </a>
+    </div>
+  </ngu-tile>
+  <button NguCarouselPrev class="left" [style.opacity]="mouseover ? 0.7:0">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <button NguCarouselNext class="right" [style.opacity]="mouseover ? 0.7:0">
+    <mat-icon>arrow_forward_ios</mat-icon>
+  </button>
+</ngu-carousel>
+
+<ng-template #spinner>
+  <div [style.height.rem]="22">
+    <app-loader [size]="'2x'"></app-loader>
+  </div>
+</ng-template>

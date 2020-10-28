@@ -1,0 +1,15 @@
+<div *ngIf="(taxonomiesList$ | async) && (taxonomiesList$ | async).length > 0;else loader">
+    <app-records-list [dataSource]="taxonomiesList$ | async"></app-records-list>
+    <app-pagination 
+        *ngIf="taxonomyNumber$ | async" 
+        [start]="startLimit.start" 
+        [limit]="startLimit.limit" 
+        [count]="taxonomyNumber$ | async"
+        (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+
+<ng-template #loader>
+    <div class="loader">
+        <app-loader [block]="true" [size]="'3x'"></app-loader>
+    </div>    
+</ng-template>

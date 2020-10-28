@@ -1,0 +1,61 @@
+<div class="pagination">
+  <span *ngIf="start !== 0">
+    <button 
+    mat-flat-button
+    color="primary"
+    (click)="onPageChange(current - 1)">
+      Precedente
+    </button>
+  </span>
+  <span *ngIf="previous > 1">
+    <button 
+    mat-button
+    (click)="onPageChange(1)">
+        {{ 1 }}
+    </button>
+  </span>
+  <span *ngIf="gapPrev">
+    ...
+  </span>
+  <span *ngIf="previous">
+    <button 
+    mat-button
+    (click)="onPageChange(previous)">
+        {{ previous }}
+    </button>
+  </span>
+  <span *ngIf="current">
+    <button 
+    mat-flat-button 
+    color="accent" 
+    class="current">
+        {{ current }}
+    </button>
+  </span>
+  <span *ngIf="next">
+    <button
+    mat-button
+    (click)="onPageChange(next)">
+        {{ next }}
+    </button>
+  </span>
+  <span *ngIf="gapNext">
+    ...
+  </span>
+  <span *ngIf="last !== current">
+    <button 
+    mat-button
+    (click)="onPageChange(last)">
+      {{ last }}
+    </button>
+  </span>
+  <span *ngIf="current !== last">
+    <button 
+    mat-flat-button 
+    color="primary"
+    (click)="onPageChange(current + 1)">
+      Successiva
+    </button>
+  </span>
+
+</div>

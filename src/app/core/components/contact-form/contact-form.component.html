@@ -1,0 +1,34 @@
+<div *ngIf="!(info$ | async)" class="dmca-container">
+  <mat-form-field>
+    <input matInput placeholder="E-Mail" [(ngModel)]="eMail">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Subject" [(ngModel)]="subject">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Content" [(ngModel)]="content"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="({{ captchaFirst }} * {{ captchaSecond }})" [(ngModel)]="product">
+  </mat-form-field>
+
+  <span class="alert" *ngIf="error">{{ error }}</span>
+  <span *ngIf="loading"><app-loader [size]="'2x'"></app-loader></span>
+
+  <button
+    mat-raised-button
+    (click)="sendEmail()">
+      Send   
+  </button>
+</div>
+<div *ngIf="info$ | async" class="dmca-container">
+  <span>{{ info$ | async }}</span>
+  <button
+    mat-raised-button
+    (click)="clearInfo()">
+      Ok   
+  </button>
+</div>

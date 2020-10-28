@@ -1,0 +1,28 @@
+<div class="login-container center">
+  <mat-card class="login-card">
+    <div class="column-flex-container fullwidth">
+      <mat-card-title>Area Di Accesso</mat-card-title>
+      <mat-card-subtitle>{{loginError}}</mat-card-subtitle>
+      <mat-card-content class="column-flex-container fullwidth">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome Utente</mat-label>
+          <input matInput [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Parola d'ordine</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>        
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="space-around"
+          fxLayoutGap = 1rem>
+          <button color="primary" fxFlex.sm="80%" mat-raised-button (click)="doLogin();">Accedi</button>
+          <button color="accent" mat-raised-button [routerLink]="['/registro']" routerLinkActive="router-link-active">Registro</button>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>

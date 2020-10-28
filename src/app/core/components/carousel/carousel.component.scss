@@ -1,0 +1,66 @@
+.carousel-item {
+  height: 20rem;
+  text-align: center;
+  margin: auto;
+  background-color: #fafafa;
+}
+
+.carousel-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+.carousel-image-container {
+  height: 15rem;
+  margin: 0.4rem;
+  padding-top: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.carousel-item img {
+  max-width: 95%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+  border-radius: 3px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.carousel-item h2 {
+  padding-top: 1rem;
+  font-size: 1rem;
+  margin: 0;
+}
+
+ngu-carousel {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.left {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 60%;
+    left: 0;
+    border:0;
+}
+
+.right {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 60%;
+    right: 0;
+    border:0;
+}

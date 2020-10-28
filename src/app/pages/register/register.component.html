@@ -1,0 +1,23 @@
+<div class="register-container center">
+  <mat-card class="register-card">
+    <div *ngIf="!register" class="column-flex-container fullwidth">
+      <mat-card-title>Area del registro</mat-card-title>
+      <mat-card-subtitle>{{loginError}}</mat-card-subtitle>
+      <mat-card-content class="column-flex-container fullwidth">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome Utente</mat-label>
+          <input matInput [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Parola d'ordine</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+        <button color="primary" mat-raised-button (click)="doRegister();">Registro</button>
+      </mat-card-content>
+    </div>
+    <div *ngIf="register">
+      <p>Not implemented.</p>
+    </div>
+  </mat-card>
+</div>

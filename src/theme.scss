@@ -1,0 +1,62 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+@mixin my-app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .navbar {
+    background-color: mat-color($primary, 100);
+    border-color: mat-color($accent);
+  }
+
+  .sidenav-container {
+    background-color: mat-color($primary, 100);
+  }
+
+  .side-panel {
+    background-color: mat-color($primary, 100);
+  }
+
+  .mat-menu-panel {
+    background-color: mat-color($primary, 100);
+  }
+
+  .menu-button-accent {
+    color: mat-color($accent);
+  }
+
+  .nav-button:hover {
+    color: mat-color($accent);
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: mat-color($accent) !important;
+  }
+
+  mat-icon {
+    color: mat-color($accent);
+  }
+}
+
+$typography: mat-typography-config(
+  $font-family: 'Titillium Web'
+);
+
+$app-primary: mat-palette($mat-grey, 700, 500, 900);
+$app-accent: mat-palette($mat-red, 800, 800, 800);
+
+$app-warn: mat-palette($mat-red);
+
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-typography($typography);
+
+@include angular-material-theme($app-theme);
+
+@include my-app-theme($app-theme);

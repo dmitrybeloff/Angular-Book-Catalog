@@ -1,0 +1,245 @@
+<nav class="breadcrumbs">
+  <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a itemprop="item" [routerLink]="['/']">
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1"/>
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a itemprop="item" [routerLink]="['/libri']">
+        <span itemprop="name">Libri</span>
+      </a>
+      <meta itemprop="position" content="2"/>
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a *ngIf="record; else spinnerInline" itemprop="item" [routerLink]="['/libri', record?.categorie_slug]">
+        <span itemprop="name">{{record?.categorie_name | titlecase}}</span>
+      </a>
+      <meta itemprop="position" content="3"/>
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a itemprop="item" *ngIf="record; else spinnerInline" [routerLink]="['/libri', record?.categorie_slug, record.slug]">
+        <span itemprop="name">{{record?.title}}</span>
+      </a>
+      <meta itemprop="position" content="4"/>
+    </li>
+  </ul>
+</nav>
+
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="5px"
+  [style.paddingBottom.rem]="1"
+  *ngIf="record; else spinner"
+  >
+  <div class="left-container"
+    fxFlex=25%
+    fxFlexOrder="1">
+    <div *ngIf="record">
+      <div class="image-container">
+        <img src="{{record.image}}" alt="{{record.title}}">
+      </div>
+      <mat-divider></mat-divider>
+      <div [ngStyle]="{'display' : isLargeScreen ? 'none' : 'block'}">
+        <mat-divider></mat-divider>
+        <div class="article-header center">
+          <h1>
+            {{record?.title}}
+          </h1>
+          <div class="author" *ngIf="record.autore_name">
+            di
+            <span>
+              <a [routerLink]="['/autore', record?.autore_slug]">{{record.autore_name | titlecase}}</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div [ngStyle]="{'display' : isLargeScreen ? 'block' : 'none'}">
+        <mat-divider></mat-divider>
+        <div class="book-info">
+          <p *ngIf="record.ean">
+            Ean:
+            {{record.ean}}
+          </p>
+          <p *ngIf="record.annoedizione_name">
+            Anno:
+            <a [routerLink]="['/edizione', record?.annoedizione_slug]">{{record.annoedizione_name}}</a>
+          </p>
+          <p *ngIf="record.editore_name">
+            Editore:
+            <a [routerLink]="['/editore', record?.editore_slug]">{{record.editore_name | titlecase}}</a>
+          </p>
+          <p *ngIf="record.traduttore_name">
+            Traduttore:
+            <a [routerLink]="['/traduttore', record?.traduttore_slug]">{{record.traduttore_name | titlecase}}</a>
+          </p>
+          <p *ngIf="record.collana_name">
+            Collana:
+            <a [routerLink]="['/collana', record?.collana_slug]">{{record.collana_name | titlecase}}</a>
+          </p>
+          <p *ngIf="record.incommerciodal_name">
+            In Commercio Dal:
+            <a [routerLink]="['/dal', record?.incommerciodal_slug]">{{record.incommerciodal_name | titlecase}}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="description-container"
+    fxFlex=55%
+    fxFlex.sm=50%
+    fxFlex.xs=100%
+    fxFlexOrder="2"
+    fxFlexOrder.xs="3">
+    <div class="article-header"
+      [ngStyle]="{'display' : isLargeScreen ? 'block' : 'none'}">
+      <h1>
+        {{record?.title}}
+      </h1>
+      <div class="author" *ngIf="record.autore_name">
+        di
+        <span>
+          <a [routerLink]="['/autore', record?.autore_slug]">{{record.autore_name | titlecase}}</a>
+        </span>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="sintesi">
+      <div *ngIf="record.descrizione">
+        <h2>Sintesi</h2>
+        <div class="description"
+          [@minMax]="isMinimized ? 'minimized' : 'maximized'">
+          <div [innerHTML]="record.descrizione"></div>
+          <div class="divider">
+            <button mat-button (click)="toggleMinMax()">
+              <mat-icon [innerText]="isMinimized ? 'keyboard_arrow_down' : 'keyboard_arrow_up'"></mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div>
+        <h2>Informazioni sul libro</h2>
+      </div>
+      <div class="info"
+        fxLayoutAlign="space-between center"
+        fxLayoutAlign.sm="space-between stretch"
+        fxLayoutAlign.xs="space-between stretch"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayout.sm="column">
+        <div class="right-divider"
+          fxFlex=33%>
+          <div class="info-container"
+            fxLayout="row"
+            fxLayoutAlign="center center">
+            <mat-icon
+              fxFlex=40%
+              class="info-icon">
+              library_books
+            </mat-icon>
+            <div class="col" fxFlex=60%>
+              <strong>{{pages}}</strong>
+              <div>pagine</div>
+            </div>
+          </div>
+        </div>
+        <div class="right-divider"
+          fxFlex=33%>
+          <div class="info-container" fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon
+              fxFlex=40%
+              class="info-icon">
+              access_time
+            </mat-icon>
+            <div class="col" fxFlex=60%>
+              <strong>{{minMaxHours}}</strong>
+              <div>ore di lettura</div>
+            </div>
+          </div>
+        </div>
+        <div
+          fxFlex=33%>
+          <div class="info-container" fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon
+              fxFlex=40%
+              class="info-icon">
+              import_contacts
+            </mat-icon>
+            <div class="col" fxFlex=60%>
+              <strong>{{words}}</strong>
+              <div>parole in totale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    fxFlexOrder="3"
+    fxFlexOrder.xs="2"
+    fxFlex=20%
+    fxFlex.sm=25%>
+    <div class="right-container">
+      <div class="overlay" *ngIf="rightOverlay">
+        <app-loader [block]="true" [size]="'3x'"></app-loader>
+      </div>
+      <p>Placeholder</p>
+    </div>
+  </div>
+</div>
+
+<div [ngStyle]="{'display' : isLargeScreen ? 'none' : 'block'}" *ngIf="record">
+  <div class="book-info left-container">
+    <p *ngIf="record.ean">
+      Ean:
+      {{record.ean}}
+    </p>
+    <p *ngIf="record.annoedizione_name">
+      Anno:
+      <a [routerLink]="['/edizione', record?.annoedizione_slug]">{{record.annoedizione_name}}</a>
+    </p>
+    <p *ngIf="record.editore_name">
+      Editore:
+      <a [routerLink]="['/editore', record?.editore_slug]">{{record.editore_name | titlecase}}</a>
+    </p>
+    <p *ngIf="record.traduttore_name">
+      Traduttore:
+      <a [routerLink]="['/traduttore', record?.traduttore_slug]">{{record.traduttore_name | titlecase}}</a>
+    </p>
+    <p *ngIf="record.collana_name">
+      Collana:
+      <a [routerLink]="['/collana', record?.collana_slug]">{{record.collana_name | titlecase}}</a>
+    </p>
+    <p *ngIf="record.incommerciodal_name">
+      In Commercio Dal:
+      <a [routerLink]="['/dal', record?.incommerciodal_slug]">{{record.incommerciodal_name | titlecase}}</a>
+    </p>
+  </div>
+</div>
+
+<div *ngIf="(relatedCategory$ | async)" class="related-container">
+  <h2>eBook simili</h2>
+  <app-carousel [dataSource]="relatedCategory$ | async"></app-carousel>
+</div>
+<div *ngIf="record && (relatedAuthor$ | async) && (relatedAuthor$ | async).length > 0" class="related-container">
+  <h2>Altri libri di {{record.autore_name | titlecase}}</h2>
+  <app-carousel [dataSource]="relatedAuthor$ | async"></app-carousel>
+</div>
+<div *ngIf="(relatedEditore$ | async) && (relatedEditore$ | async).length > 0" class="related-container">
+  <h2>Dallo Stesso Editore di "{{ record.title }}"</h2>
+  <app-carousel [dataSource]="relatedEditore$ | async"></app-carousel>
+</div>
+
+<ng-template #spinnerInline>
+  <app-loader [block]="false" [size]="'sm'"></app-loader>
+</ng-template>
+
+<ng-template #spinner>
+  <div [style.height.rem]="5">
+    <app-loader [size]="'2x'"></app-loader>
+  </div>
+</ng-template>
+

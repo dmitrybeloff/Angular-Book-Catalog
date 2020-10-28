@@ -1,0 +1,17 @@
+<h2><a [routerLink]="['/libri', 'Cinema, musica, tv, spettacolo']">Cinema, Musica, TV, Spettacolo</a></h2>
+<app-carousel [dataSource]="societaCategory$ | async"></app-carousel>
+
+<mat-divider></mat-divider>
+
+<h2><a [routerLink]="['/libri', 'Narrativa italiana']">Narrativa Italiana</a></h2>
+<app-carousel [dataSource]="narrativaItalianaCategory$ | async"></app-carousel>
+
+<mat-divider></mat-divider>
+
+<h2><a [routerLink]="['/libri', 'Classici, poesia, teatro e critica']">Classici, Poesia, Teatro e Critica</a></h2>
+<app-carousel [dataSource]="classiciCategory$ | async"></app-carousel>
+
+<mat-divider></mat-divider>
+
+<h2><a [routerLink]="['/', 'libri']">Ultimi libri</a></h2>
+<app-carousel [dataSource]="simpleRecords$ | async"></app-carousel>

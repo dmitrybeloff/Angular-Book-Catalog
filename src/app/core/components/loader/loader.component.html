@@ -1,0 +1,107 @@
+<ng-container [ngSwitch]="size">
+
+  <ng-container *ngSwitchCase="'sm'">
+    <ng-container *ngTemplateOutlet="block ? sm : smInline"></ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'1x'">
+    <ng-container *ngTemplateOutlet="block ? default : defaultInline"></ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'2x'">
+    <ng-container *ngTemplateOutlet="block ? x2 : x2Inline"></ng-container>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'3x'">
+    <ng-container *ngTemplateOutlet="block ? x3 : x3Inline"></ng-container>
+  </ng-container>
+
+</ng-container>
+
+<ng-template #sm>
+  <div  class="spinner-container">
+    <div class="spinner la-line-scale la-dark la-sm">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #smInline>
+  <div class="spinner-inline la-line-scale la-dark la-sm">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ng-template>
+
+<ng-template #default>
+  <div  class="spinner-container">
+    <div class="spinner la-line-scale la-dark">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #defaultInline>
+  <div class="spinner-inline la-line-scale la-dark">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ng-template>
+
+<ng-template #x2>
+  <div  class="spinner-container">
+    <div class="spinner la-line-scale la-dark la-2x">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #x2Inline>
+  <div class="spinner la-line-scale la-dark la-2x">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ng-template>
+
+<ng-template #x3>
+  <div  class="spinner-container">
+    <div class="spinner la-line-scale la-dark la-3x">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #x3Inline>
+  <div class="spinner-inline la-line-scale la-dark la-3x">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ng-template>

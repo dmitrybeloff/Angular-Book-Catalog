@@ -1,0 +1,28 @@
+<div>
+  <div *ngFor="let item of dataSource">
+    <div
+      fxLayout="row"
+      class="item-container">
+      <div class="image-container" fxFlex="30%" [routerLink]="['/libri', item.categorie_slug, item.slug]">
+        <img src="{{item.image}}" alt="{{item.title}}">
+      </div>
+      <div fxFlex="70%" class="description-container">
+        <h2>
+          <a [routerLink]="['/libri', item.categorie_slug, item.slug]">
+            {{ item.title }}
+          </a>          
+        </h2>
+        <div class="author" *ngIf="item.autore_name">
+          di
+          <span>
+            <a [routerLink]="['/autore', item?.autore_slug]">
+              {{ item.autore_name }}
+            </a>
+          </span>
+        </div>
+        <div *ngIf="item.descrizione && isLargeScreen" [innerHtml]="(item.descrizione.length > 500) ? (item.descrizione | slice:0:500) + '...' : item.descrizione"></div>
+        <div *ngIf="item.descrizione && isMediumScreen" [innerHtml]="(item.descrizione.length > 250) ? (item.descrizione | slice:0:250) + '...' : item.descrizione"></div>
+      </div>
+    </div>
+  </div>
+</div>

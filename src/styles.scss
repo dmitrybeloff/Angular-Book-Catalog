@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  font-family: 'Titillium Web';
+}
+
+.column-flex-container {
+  display: flex !important;
+  flex-direction: column;
+}
+.row-flex-container {
+  display: flex !important;
+  flex-direction: row;
+}
+.list-table {
+  width: 90%;
+  margin: auto;
+}
+.center {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.fullwidth {
+  width: 100%;
+}
+.inline {
+  display: inline-block;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+

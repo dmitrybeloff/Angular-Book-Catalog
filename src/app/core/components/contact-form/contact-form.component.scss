@@ -1,0 +1,33 @@
+.dmca-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    textarea {
+        height: 200px;
+    }
+
+    button {
+        max-width: 150px;
+        margin: auto;
+    }
+
+    .alert {
+        color: red;
+    }
+
+    app-loader {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    > * {
+        width: 100%;
+    }    
+}
